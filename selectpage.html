@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Destination - Select Login</title>
+<link rel="shortcut icon" href="./assets/images/titleLogo.png" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- External CSS -->
+<link rel="stylesheet" href="./assets/css/select.css">
+
+</head>
+<style>
+  
+/* Light Mode Background */
+
+.light-mode .bg-layer{
+ 
+  animation:none !important;
+  background:linear-gradient(-45deg,#bd85ad,#6d86b1,#bd85ae,#7288ae);
+  color:rgb(26, 20, 215);
+}
+/* Toggle Button */
+.toggle-btn{
+  position:fixed;
+  top:15px;
+  right:15px;
+  z-index:999;
+  top:20px;
+  right:20px;
+  padding:8px 15px;
+  border-radius:20px;
+  border:none;
+  cursor:pointer;
+  background:rgb(10, 173, 232);
+  color:#1e3c72;
+  font-weight:600;
+}
+@media (max-width: 1024px){
+
+  body{
+    padding:30px 15px;
+  }
+
+  .container{
+    gap:25px;
+  }
+
+  .card{
+    width:280px;
+  }
+}
+</style>
+<body>
+<div class="bg-layer"></div>
+<button class="toggle-btn" onclick="toggleMode()">🌙 Mode</button>
+
+<img src="./assets/images/TourlyLogo.png" class="logo" alt="Logo">
+<h1 class="animated-title">
+🌍 
+  <span>D</span><span>i</span><span>s</span><span>c</span><span>o</span><span>v</span><span>e</span><span>r</span>
+  <span>&nbsp;</span>
+  <span>D</span><span>e</span><span>s</span><span>t</span><span>i</span><span>n</span><span>a</span><span>t</span><span>i</span><span>o</span><span>n</span>
+</h1>
+<div class="container">
+
+ <div class="card">
+  <i class="fas fa-user"></i>
+  <h2>User Login</h2>
+  <button onclick="location.href='login.php?role=user'">Login</button>
+</div>
+
+<div class="card">
+  <i class="fas fa-user-shield"></i>
+  <h2>Admin Login</h2>
+  <button onclick="location.href='login.php?role=admin'">Login</button>
+</div>
+
+  <div class="card">
+    <i class="fas fa-globe"></i>
+    <h2>Guest Access</h2>
+    <button onclick="location.href='index.php'">Continue</button>
+  </div>
+
+</div>
+
+<script>
+const cards = document.querySelectorAll(".card");
+document.querySelectorAll(".animated-title span").forEach((el, index)=>{
+  el.style.setProperty("--i", index);
+});
+cards.forEach(card => {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / 15);
+    const rotateY = ((centerX - x) / 15);
+
+    card.style.transform = 
+      `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  });
+
+if (window.innerWidth > 768) {
+  cards.forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / 15);
+      const rotateY = ((centerX - x) / 15);
+
+      card.style.transform =
+      `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+    });
+  });
+}
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+  });
+});
+
+function toggleMode(){
+  document.body.classList.toggle("light-mode");
+}
+</script>
+
+</body>
+</html>
